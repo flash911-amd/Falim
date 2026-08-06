@@ -4,215 +4,313 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>Cyberpunk V8</title>
 
-<title>Cyberpunk V7</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-html,
+html,body{
+width:100%;
+height:100%;
+overflow:hidden;
+font-family:'Orbitron',sans-serif;
+background:#03060b;
+color:#e8ffff;
+}
+
 body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#05070b;
-    color:#e8ffff;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 .background{
+position:fixed;
+inset:0;
+overflow:hidden;
+background:
+radial-gradient(circle at top left,#00ffff22,transparent 35%),
+radial-gradient(circle at bottom right,#0088ff22,transparent 35%),
+linear-gradient(180deg,#02040a,#07111d,#02040a);
+z-index:-5;
+}
 
-    position:fixed;
-    inset:0;
+.grid{
+position:absolute;
+inset:0;
+background-image:
+linear-gradient(rgba(0,255,255,.05) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,255,255,.05) 1px,transparent 1px);
+background-size:45px 45px;
+animation:gridMove 8s linear infinite;
+}
 
-    background:
-    radial-gradient(circle at top left,
-    rgba(0,255,255,.08),
-    transparent 35%),
+@keyframes gridMove{
+0%{transform:translateY(0);}
+100%{transform:translateY(45px);}
+}
 
-    radial-gradient(circle at bottom right,
-    rgba(0,170,255,.08),
-    transparent 35%),
+.glow{
+position:absolute;
+width:400px;
+height:400px;
+border-radius:50%;
+filter:blur(120px);
+opacity:.35;
+animation:floatGlow 10s ease-in-out infinite;
+}
 
-    linear-gradient(
-    180deg,
-    #05070b,
-    #08111b,
-    #05070b);
+.glow1{
+background:#00ffff;
+top:-150px;
+left:-100px;
+}
 
-    z-index:-2;
+.glow2{
+background:#008cff;
+bottom:-150px;
+right:-100px;
+animation-delay:4s;
+}
+
+@keyframes floatGlow{
+
+0%,100%{
+transform:translate(0,0);
+}
+
+50%{
+transform:translate(60px,-40px);
+}
 
 }
 
-.background::before{
+.scanline{
+position:absolute;
+inset:0;
+background:linear-gradient(
+transparent 50%,
+rgba(255,255,255,.02) 51%);
+background-size:100% 4px;
+pointer-events:none;
+animation:scan 8s linear infinite;
+}
 
-    content:"";
+@keyframes scan{
 
-    position:absolute;
+0%{
+transform:translateY(-100%);
+}
 
-    inset:0;
-
-    background-image:
-
-    linear-gradient(
-    rgba(0,255,255,.04) 1px,
-    transparent 1px),
-
-    linear-gradient(
-    90deg,
-    rgba(0,255,255,.04) 1px,
-    transparent 1px);
-
-    background-size:45px 45px;
-
-    opacity:.4;
+100%{
+transform:translateY(100%);
+}
 
 }
 
 .screen{
-
-    display:none;
-
-    width:100%;
-    height:100%;
-
-    justify-content:center;
-    align-items:center;
-
-    position:absolute;
-
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
 
-.card{
-
-    width:360px;
-
-    max-width:90%;
-
-    padding:25px;
-
-    background:#0d1724;
-
-    border:1px solid #29d9ff;
-
-    border-radius:18px;
-
-    box-shadow:
-
-    0 0 15px rgba(0,255,255,.10);
-
+.active{
+display:flex;
 }
 
+.card,
+.dashboard,
 .boot-box{
 
-    width:340px;
+width:430px;
+max-width:95%;
 
-    text-align:center;
+background:rgba(8,18,30,.88);
 
+backdrop-filter:blur(15px);
+
+border:1px solid #18dfff;
+
+border-radius:22px;
+
+padding:28px;
+
+box-shadow:
+0 0 25px rgba(0,255,255,.18);
+
+animation:popup .6s ease;
+
+}
+
+@keyframes popup{
+
+from{
+transform:scale(.85);
+opacity:0;
+}
+
+to{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+h1,h2,h3{
+text-shadow:0 0 12px cyan;
+margin-bottom:15px;
 }
 
 .loading{
-
-    width:100%;
-
-    height:8px;
-
-    margin-top:25px;
-
-    background:#132333;
-
-    border-radius:10px;
-
-    overflow:hidden;
-
+width:100%;
+height:12px;
+background:#13283b;
+border-radius:30px;
+overflow:hidden;
+margin-top:25px;
 }
 
 #loadingBar{
-
-    width:0%;
-
-    height:100%;
-
-    background:#2ee8ff;
-
+width:0%;
+height:100%;
+background:linear-gradient(90deg,#00ffff,#00aaff);
+box-shadow:0 0 18px cyan;
 }
 
 button{
 
-    width:100%;
+width:100%;
 
-    margin-top:15px;
+padding:15px;
 
-    padding:13px;
+margin-top:15px;
 
-    font-size:15px;
+border:none;
 
-    border:none;
+border-radius:12px;
 
-    border-radius:10px;
+background:#14354b;
 
-    cursor:pointer;
+color:white;
 
-    background:#143247;
+font-family:inherit;
 
-    color:#bfffff;
+cursor:pointer;
 
-    transition:.25s;
+transition:.3s;
 
 }
 
 button:hover{
 
-    background:#1d4d68;
+background:#1d5776;
+
+box-shadow:0 0 20px cyan;
+
+transform:translateY(-2px);
+
+}
+
+.panel{
+
+margin-top:15px;
+
+padding:15px;
+
+border:1px solid #17dfff;
+
+border-radius:12px;
+
+background:#07131f;
+
+}
+
+.avatar{
+
+width:130px;
+
+height:130px;
+
+display:block;
+
+margin:auto;
+
+border-radius:50%;
+
+border:3px solid cyan;
+
+box-shadow:0 0 20px cyan;
+
+object-fit:cover;
+
+}
+
+.job{
+
+margin-top:10px;
+
+text-align:center;
+
+color:#87ffff;
+
+}
+
+.about{
+
+margin-top:20px;
+
+padding:15px;
+
+border:1px solid cyan;
+
+border-radius:12px;
+
+line-height:1.8;
+
+background:#07131f;
 
 }
 
 #dateBox,
 #timeBox{
 
-    margin-top:15px;
+font-size:18px;
 
-    padding:12px;
-
-    border:1px solid #29d9ff;
-
-    border-radius:10px;
-
-    background:#08131d;
+color:#7fffff;
 
 }
 
-.profile-box{
+@media(max-width:500px){
 
-    margin-top:15px;
+.card,
+.dashboard,
+.boot-box{
 
-    padding:15px;
-
-    border:1px solid #29d9ff;
-
-    border-radius:12px;
+width:95%;
+padding:22px;
 
 }
 
-.about-box{
+h1{
+font-size:24px;
+}
 
-    margin-top:15px;
-
-    padding:15px;
-
-    border:1px solid #29d9ff;
-
-    border-radius:12px;
-
-    line-height:1.8;
+button{
+font-size:15px;
+}
 
 }
 
@@ -223,14 +321,21 @@ button:hover{
 <body>
 
 <!-- Background -->
-<div class="background"></div>
+<div class="background">
+    <div class="grid"></div>
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
+    <div class="scanline"></div>
+</div>
 
 <!-- Boot Screen -->
-<div id="boot" class="screen">
+<section id="boot" class="screen active">
 
     <div class="boot-box">
 
         <h1>CYBER INTERFACE</h1>
+
+        <p>Initializing System...</p>
 
         <div class="loading">
 
@@ -238,101 +343,197 @@ button:hover{
 
         </div>
 
-        <p id="loadingText">
-        Initializing...
-        </p>
+        <p id="loadingText">0%</p>
 
     </div>
 
-</div>
+</section>
 
 <!-- Login -->
-<div id="login" class="screen">
+<section id="login" class="screen">
 
     <div class="card">
 
         <h1>TAN FALIM SAFII</h1>
 
+        <p>Cyber Security • Web Developer</p>
+
         <button onclick="enterSystem()">
-
             ENTER SYSTEM
-
         </button>
 
     </div>
 
-</div>
+</section>
 
 <!-- Dashboard -->
-<div id="dashboard" class="screen">
+<section id="dashboard" class="screen">
 
-    <div class="card">
+    <div class="dashboard">
 
         <h1>CYBER DASHBOARD</h1>
 
-        <div id="dateBox"></div>
+        <div class="panel">
+            <h3>Tanggal</h3>
+            <p id="dateBox"></p>
+        </div>
 
-        <div id="timeBox"></div>
+        <div class="panel">
+            <h3>Jam</h3>
+            <p id="timeBox"></p>
+        </div>
+
+        <div class="panel">
+            <h3>Status</h3>
+            <p>ONLINE</p>
+        </div>
 
         <button onclick="openProfile()">
-
             MY PROFILE
-
         </button>
 
         <button onclick="exitSystem()">
-
             EXIT
-
         </button>
 
     </div>
 
-</div>
+</section>
 
 <!-- Profile -->
-<div id="profile" class="screen">
+<section id="profile" class="screen">
 
     <div class="card">
 
-        <h1>MY PROFILE</h1>
+        <img
+        src="https://i.imgur.com/6VBx3io.png"
+        class="avatar">
 
-        <div class="profile-box">
+        <h2>TAN FALIM SAFII</h2>
 
-            <h2>Tan Falim Safii</h2>
+        <p class="job">
+            Technology Enthusiast
+        <p
+            
+<div class="about">
 
-            <p>Technology Enthusiast</p>
+<h3>ABOUT ME</h3>
 
-        </div>
+<p>
 
-        <div class="about-box">
+Halo! Saya <b>Tan Falim Safii</b>.
 
-            <h2>ABOUT ME</h2>
+Saya memiliki minat pada dunia teknologi,
+Web Development,
+Programming,
+UI/UX Design,
+dan Cyber Security.
 
-            <p>
+Saya senang membuat website
+bertema Cyberpunk yang modern,
+ringan, dan responsif.
 
-                Halo!
+</p>
 
-                Saya memiliki minat pada
-                Web Development,
-                Programming,
-                UI/UX Design,
-                serta senang membuat
-                website bertema Cyberpunk.
+</div>
 
+<div class="about">
+
+<h3>MY SKILLS</h3>
+
+<div class="skill">
+
+HTML
+
+<div class="bar">
+
+<div class="fill html"></div>
+
+</div>
+
+</div>
+
+<div class="skill">
+
+CSS
+
+<div class="bar">
+
+<div class="fill css"></div>
+
+</div>
+
+</div>
+
+<div class="skill">
+
+JavaScript
+
+<div class="bar">
+
+<div class="fill js"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="about">
+
+<h3>SYSTEM INFO</h3>
+
+<p>
+
+Status :
+<span class="online">
+
+ONLINE
+
+</span>
+
+</p>
+
+<p>
+
+Version :
+
+Cyberpunk V8
+
+</p>
+
+<p>
+
+Theme :
+
+Cyber Neon
+
+</p>
+
+</div>
+
+<div class="social">
+
+<a href="#">GitHub</a>
+
+<a href="#">Instagram</a>
+
+<a href="#">TikTok</a>
+
+<a href="#">WhatsApp</a>
+
+</div>
             </p>
 
         </div>
 
         <button onclick="backDashboard()">
-
             BACK
-
         </button>
 
     </div>
 
-</div>
+</section>
 
 <script>
 
@@ -342,44 +543,54 @@ const dashboard = document.getElementById("dashboard");
 const profile = document.getElementById("profile");
 
 const loadingBar = document.getElementById("loadingBar");
+const loadingText = document.getElementById("loadingText");
 
 const dateBox = document.getElementById("dateBox");
 const timeBox = document.getElementById("timeBox");
 
+function hideAll(){
+    boot.classList.remove("active");
+    login.classList.remove("active");
+    dashboard.classList.remove("active");
+    profile.classList.remove("active");
+}
+
 function showScreen(screen){
-
-    boot.style.display = "none";
-    login.style.display = "none";
-    dashboard.style.display = "none";
-    profile.style.display = "none";
-
-    screen.style.display = "flex";
-
+    hideAll();
+    screen.classList.add("active");
 }
 
 function startBoot(){
 
     showScreen(boot);
 
-    let width = 0;
+    let percent = 0;
 
     loadingBar.style.width = "0%";
 
-    const loading = setInterval(function(){
+    loadingText.innerHTML = "0%";
 
-        width += 2;
+    const bootLoading = setInterval(function(){
 
-        loadingBar.style.width = width + "%";
+        percent++;
 
-        if(width >= 100){
+        loadingBar.style.width = percent + "%";
 
-            clearInterval(loading);
+        loadingText.innerHTML = percent + "%";
 
-            showScreen(login);
+        if(percent >= 100){
+
+            clearInterval(bootLoading);
+
+            setTimeout(function(){
+
+                showScreen(login);
+
+            },500);
 
         }
 
-    },30);
+    },25);
 
 }
 
@@ -412,7 +623,6 @@ function updateClock(){
     const now = new Date();
 
     dateBox.innerHTML =
-    "📅 " +
     now.toLocaleDateString("id-ID",{
 
         weekday:"long",
@@ -426,21 +636,21 @@ function updateClock(){
     });
 
     timeBox.innerHTML =
-    "🕒 " +
     now.toLocaleTimeString("id-ID");
 
 }
 
-setInterval(updateClock,1000);
-
 updateClock();
 
-startBoot();
+setInterval(updateClock,1000);
+
+window.onload = function(){
+
+    startBoot();
+
+};
 
 </script>
 
 </body>
-
 </html>
-
-<!-- update -->
