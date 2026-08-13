@@ -66,8 +66,9 @@ align-items:center;
 
     z-index:-10;
 }
+    
+/* ===== GRID FUTURISTIK ===== */
 
-/* Grid halus */
 .background::before{
     content:"";
     position:absolute;
@@ -75,28 +76,21 @@ align-items:center;
 
     background-image:
         linear-gradient(
-            rgba(30,200,255,.035) 1px,
+            rgba(0,220,255,.12) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(30,200,255,.035) 1px,
+            rgba(0,220,255,.12) 1px,
             transparent 1px
         );
 
-    background-size:55px 55px;
+    background-size:35px 35px;
 
-    mask-image:linear-gradient(
-        to bottom,
-        transparent 0%,
-        black 20%,
-        black 80%,
-        transparent 100%
-    );
+    opacity:.65;
 
-    opacity:.55;
+    pointer-events:none;
 }
-
 /* Cahaya tengah */
 .background::after{
     content:"";
