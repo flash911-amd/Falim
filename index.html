@@ -68,28 +68,54 @@ align-items:center;
 }
     
 /* ===== GRID FUTURISTIK ===== */
-
-.background::before{
-    content:"";
-    position:absolute;
-    inset:0;
+.background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
 
     background-image:
         linear-gradient(
-            rgba(0,220,255,.12) 1px,
+            rgba(0, 220, 255, 0.12) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(0,220,255,.12) 1px,
+            rgba(0, 220, 255, 0.12) 1px,
             transparent 1px
         );
 
-    background-size:35px 35px;
+    background-size: 45px 45px;
 
-    opacity:.65;
+    opacity: 0.9;
 
-    pointer-events:none;
+    /* membuat grid tetap tajam */
+    filter: none;
+
+    pointer-events: none;
+}
+
+/* garis grid tambahan */
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 255, 255, 0.05) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 255, 255, 0.05) 1px,
+            transparent 1px
+        );
+
+    background-size: 15px 15px;
+
+    opacity: 0.35;
+
+    pointer-events: none;
 }
 /* Cahaya tengah */
 .background::after{
