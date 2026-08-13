@@ -313,7 +313,146 @@ font-size:15px;
 }
 
 }
+/* ===== PROFILE V2 ===== */
 
+#profile{
+    width:100%;
+    height:100%;
+    padding:20px;
+}
+
+.profile-card{
+    width:420px;
+    max-width:92%;
+    max-height:85vh;
+    overflow-y:auto;
+    padding:24px;
+    background:rgba(7,16,27,.96);
+    border:1px solid rgba(41,217,255,.6);
+    border-radius:20px;
+
+    box-shadow:
+        0 0 25px rgba(0,255,255,.10),
+        inset 0 0 20px rgba(0,150,255,.03);
+}
+
+.profile-card::-webkit-scrollbar{
+    width:4px;
+}
+
+.profile-card::-webkit-scrollbar-thumb{
+    background:#29d9ff;
+    border-radius:10px;
+}
+
+.profile-title{
+    text-align:center;
+    font-size:25px;
+    letter-spacing:3px;
+    margin-bottom:20px;
+    color:#e8ffff;
+
+    text-shadow:
+        0 0 8px rgba(0,255,255,.6);
+}
+
+.profile-intro{
+    text-align:center;
+    padding:16px;
+    margin-bottom:12px;
+
+    border:1px solid rgba(41,217,255,.35);
+    border-radius:14px;
+    background:rgba(10,28,43,.7);
+}
+
+.profile-intro h2{
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+.profile-intro p{
+    font-size:13px;
+    color:#70dfff;
+}
+
+.profile-section{
+    padding:15px;
+    margin-top:12px;
+
+    border:1px solid rgba(41,217,255,.3);
+    border-radius:14px;
+    background:rgba(8,22,35,.75);
+}
+
+.profile-section h3{
+    font-size:13px;
+    letter-spacing:2px;
+    color:#55e5ff;
+    margin-bottom:10px;
+}
+
+.profile-section p{
+    font-size:13px;
+    line-height:1.7;
+    color:#d8ffff;
+}
+
+.skill-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.skill{
+    padding:7px 11px;
+    border:1px solid rgba(41,217,255,.4);
+    border-radius:8px;
+    font-size:12px;
+    color:#bfffff;
+    background:#0b1d2c;
+}
+
+.system-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.system-item{
+    padding:10px;
+    border-radius:9px;
+    background:#0a1a28;
+    border:1px solid rgba(41,217,255,.25);
+}
+
+.system-item small{
+    display:block;
+    color:#55dfff;
+    margin-bottom:4px;
+}
+
+.system-item span{
+    font-size:12px;
+}
+
+.profile-card > button{
+    margin-top:15px;
+}
+
+@media(max-width:420px){
+
+    .profile-card{
+        width:360px;
+        padding:18px;
+    }
+
+    .profile-title{
+        font-size:22px;
+    }
+
+}
+    
 </style>
 
 </head>
@@ -413,135 +552,94 @@ font-size:15px;
 <!-- Profile -->
 <section id="profile" class="screen">
 
-    <div class="card">
+    <div class="profile-card">
 
-        <img
-        src="https://i.imgur.com/6VBx3io.png"
-        class="avatar">
+        <h1 class="profile-title">
+            MY PROFILE
+        </h1>
 
-        <h2>TAN FALIM SAFII</h2>
+        <div class="profile-intro">
 
-        <p class="job">
-            Technology Enthusiast
-        <p
-            
-<div class="about">
+            <h2>TAN FALIM SAFII</h2>
 
-<h3>ABOUT ME</h3>
-
-<p>
-
-Halo! Saya <b>Tan Falim Safii</b>.
-
-Saya memiliki minat pada dunia teknologi,
-Web Development,
-Programming,
-UI/UX Design,
-dan Cyber Security.
-
-Saya senang membuat website
-bertema Cyberpunk yang modern,
-ringan, dan responsif.
-
-</p>
-
-</div>
-
-<div class="about">
-
-<h3>MY SKILLS</h3>
-
-<div class="skill">
-
-HTML
-
-<div class="bar">
-
-<div class="fill html"></div>
-
-</div>
-
-</div>
-
-<div class="skill">
-
-CSS
-
-<div class="bar">
-
-<div class="fill css"></div>
-
-</div>
-
-</div>
-
-<div class="skill">
-
-JavaScript
-
-<div class="bar">
-
-<div class="fill js"></div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="about">
-
-<h3>SYSTEM INFO</h3>
-
-<p>
-
-Status :
-<span class="online">
-
-ONLINE
-
-</span>
-
-</p>
-
-<p>
-
-Version :
-
-Cyberpunk V8
-
-</p>
-
-<p>
-
-Theme :
-
-Cyber Neon
-
-</p>
-
-</div>
-
-<div class="social">
-
-<a href="#">GitHub</a>
-
-<a href="#">Instagram</a>
-
-<a href="#">TikTok</a>
-
-<a href="#">WhatsApp</a>
-
-</div>
+            <p>
+                Cyber Security • Web Developer
             </p>
 
         </div>
 
+
+        <div class="profile-section">
+
+            <h3>ABOUT ME</h3>
+
+            <p>
+                Halo! Saya Tan Falim Safii.
+                Saya memiliki minat pada teknologi,
+                Web Development, Programming,
+                UI/UX Design, dan Cyber Security.
+                Saya senang membuat website dengan
+                tampilan modern dan futuristik.
+            </p>
+
+        </div>
+
+
+        <div class="profile-section">
+
+            <h3>MY SKILLS</h3>
+
+            <div class="skill-list">
+
+                <div class="skill">HTML</div>
+                <div class="skill">CSS</div>
+                <div class="skill">JavaScript</div>
+                <div class="skill">Web Development</div>
+                <div class="skill">UI/UX</div>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-section">
+
+            <h3>SYSTEM INFO</h3>
+
+            <div class="system-info">
+
+                <div class="system-item">
+                    <small>STATUS</small>
+                    <span>● ONLINE</span>
+                </div>
+
+                <div class="system-item">
+                    <small>VERSION</small>
+                    <span>Cyberpunk V8</span>
+                </div>
+
+                <div class="system-item">
+                    <small>THEME</small>
+                    <span>Cyber Neon</span>
+                </div>
+
+                <div class="system-item">
+                    <small>MODE</small>
+                    <span>ACTIVE</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
         <button onclick="backDashboard()">
-            BACK
+            ← BACK TO DASHBOARD
         </button>
 
     </div>
+
+</section>
 
 </section>
 
