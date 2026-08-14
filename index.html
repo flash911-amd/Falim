@@ -332,7 +332,21 @@ line-height:1.8;
 background:#07131f;
 
 }
+<div class="dashboard-actions">
 
+    <button onclick="openProfile()">
+        MY PROFILE
+    </button>
+
+    <button onclick="openMiniGame()">
+        🎮 MINI GAME
+    </button>
+
+    <button onclick="exitSystem()">
+        EXIT
+    </button>
+
+</div>
 #dateBox,
 #timeBox{
 
@@ -362,7 +376,7 @@ font-size:15px;
 }
 
 }
-/* ===== PROFILE V2 ===== */
+/* ===== PROFILE V2 ===== */f
 
 #profile{
     width:100%;
@@ -501,7 +515,97 @@ font-size:15px;
     }
 
 }
-    
+  .dashboard-actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:15px;
+}
+
+.dashboard-actions button{
+    margin-top:0;
+}  
+    /* ===== MINI GAME ===== */
+
+.game-card{
+    width:380px;
+    max-width:92%;
+
+    padding:25px;
+
+    text-align:center;
+
+    background:rgba(7,16,27,.96);
+
+    border:1px solid rgba(41,217,255,.6);
+
+    border-radius:20px;
+
+    box-shadow:
+        0 0 25px rgba(0,255,255,.12),
+        inset 0 0 20px rgba(0,150,255,.04);
+}
+
+.game-card h1{
+    font-size:25px;
+    letter-spacing:3px;
+}
+
+.game-info{
+    margin-bottom:20px;
+    color:#80dfff;
+    font-size:13px;
+}
+
+.score-box{
+    padding:18px;
+    margin-bottom:18px;
+
+    border:1px solid rgba(41,217,255,.35);
+
+    border-radius:14px;
+
+    background:#081522;
+
+    font-size:14px;
+}
+
+#score{
+    display:block;
+
+    margin-top:5px;
+
+    font-size:32px;
+
+    color:#55eaff;
+
+    text-shadow:0 0 15px cyan;
+}
+
+#gameButton{
+    height:100px;
+
+    font-size:25px;
+    font-weight:bold;
+
+    background:#092b3d;
+
+    border:1px solid cyan;
+
+    box-shadow:
+        0 0 15px rgba(0,255,255,.15);
+
+    transition:.15s;
+}
+
+#gameButton:active{
+    transform:scale(.95);
+
+    background:#0d536b;
+
+    box-shadow:
+        0 0 30px cyan;
+}
 </style>
 
 </head>
@@ -597,7 +701,33 @@ font-size:15px;
 </section>
 
 </section>
+<!-- Mini Game -->
+<section id="miniGame" class="screen">
 
+    <div class="game-card">
+
+        <h1>MINI GAME</h1>
+
+        <p class="game-info">
+            Tekan tombol untuk mendapatkan poin!
+        </p>
+
+        <div class="score-box">
+            SCORE:
+            <span id="score">0</span>
+        </div>
+
+        <button id="gameButton" onclick="playGame()">
+            TAP!
+        </button>
+
+        <button onclick="backDashboard()">
+            ← BACK
+        </button>
+
+    </div>
+
+</section>
 <!-- Profile -->
 <section id="profile" class="screen">
 
@@ -712,6 +842,7 @@ function hideAll(){
     login.classList.remove("active");
     dashboard.classList.remove("active");
     profile.classList.remove("active");
+    miniGame.classList.remove("active");
 }
 
 function showScreen(screen){
@@ -764,7 +895,28 @@ function openProfile(){
     showScreen(profile);
 
 }
+const miniGame = document.getElementById("miniGame");
 
+let score = 0;
+
+function openMiniGame(){
+
+    showScreen(miniGame);
+
+    score = 0;
+
+    document.getElementById("score").textContent = score;
+
+}
+
+function playGame(){
+
+    score++;
+
+    document.getElementById("score").textContent = score;
+
+}
+    
 function backDashboard(){
 
     showScreen(dashboard);
