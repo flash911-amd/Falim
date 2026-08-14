@@ -606,6 +606,95 @@ font-size:15px;
     box-shadow:
         0 0 30px cyan;
 }
+    /* ===== MINI GAME ===== */
+
+.minigame-card {
+    width: 430px;
+    max-width: 95%;
+    padding: 25px;
+
+    background: rgba(5, 18, 30, 0.92);
+
+    border: 1px solid rgba(0, 220, 255, 0.7);
+    border-radius: 15px;
+
+    box-shadow:
+        0 0 15px rgba(0, 220, 255, 0.25),
+        inset 0 0 25px rgba(0, 180, 255, 0.05);
+
+    text-align: center;
+}
+
+.minigame-card h1 {
+    margin-bottom: 10px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 15px 0;
+
+    padding: 10px;
+
+    border: 1px solid rgba(0, 220, 255, 0.25);
+    border-radius: 8px;
+}
+
+#gameArea {
+    position: relative;
+
+    width: 100%;
+    height: 300px;
+
+    margin-bottom: 15px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(0, 220, 255, 0.45);
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            rgba(0, 200, 255, 0.05) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 200, 255, 0.05) 1px,
+            transparent 1px
+        );
+
+    background-size: 30px 30px;
+}
+
+#target {
+    position: absolute;
+
+    width: 35px;
+    height: 35px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    border: 2px solid #00eaff;
+
+    background: #063b55;
+
+    box-shadow:
+        0 0 10px #00eaff,
+        0 0 25px rgba(0, 220, 255, 0.7);
+
+    cursor: pointer;
+
+    display: none;
+}
+
+.minigame-card button {
+    width: 100%;
+    margin-top: 8px;
+}
 </style>
 
 </head>
@@ -821,7 +910,36 @@ font-size:15px;
     </div>
 
 </section>
+<!-- MINI GAME -->
+<section id="minigame" class="screen">
 
+    <div class="minigame-card">
+
+        <h1>MINI GAME</h1>
+
+        <p>Tap kotak yang muncul!</p>
+
+        <div class="game-info">
+            <span>SCORE: <b id="gameScore">0</b></span>
+            <span>TIME: <b id="gameTime">30</b></span>
+        </div>
+
+        <div id="gameArea">
+            <button id="target" onclick="hitTarget()"></button>
+        </div>
+
+        <button onclick="startGame()">
+            START GAME
+        </button>
+
+        <button onclick="backDashboard()">
+            ← BACK TO DASHBOARD
+        </button>
+
+    </div>
+
+</section>
+    
 </section>
 
 <script>
@@ -960,7 +1078,89 @@ window.onload = function(){
     startBoot();
 
 };
+/* ===== MINI GAME ===== */
 
+let gameScore = 0;
+let gameTime = 30;
+let gameTimer = null;
+
+const minigame = document.getElementById("minigame");
+
+function openMiniGame() {
+
+    showScreen(minigame);
+
+    gameScore = 0;
+    gameTime = 30;
+
+    document.getElementById("gameScore").innerText = gameScore;
+    document.getElementById("gameTime").innerText = gameTime;
+
+    document.getElementById("target").style.display = "none";
+}
+
+
+function startGame() {
+
+    clearInterval(gameTimer);
+
+    gameScore = 0;
+    gameTime = 30;
+
+    document.getElementById("gameScore").innerText = gameScore;
+    document.getElementById("gameTime").innerText = gameTime;
+
+    const target = document.getElementById("target");
+
+    target.style.display = "block";
+
+    moveTarget();
+
+    gameTimer = setInterval(function() {
+
+        gameTime--;
+
+        document.getElementById("gameTime").innerText = gameTime;
+
+        if (gameTime <= 0) {
+
+            clearInterval(gameTimer);
+
+            target.style.display = "none";
+
+            alert("GAME OVER!\nScore kamu: " + gameScore);
+        }
+
+    }, 1000);
+}
+
+
+function moveTarget() {
+
+    const area = document.getElementById("gameArea");
+    const target = document.getElementById("target");
+
+    const maxX = area.clientWidth - target.offsetWidth;
+    const maxY = area.clientHeight - target.offsetHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    target.style.left = x + "px";
+    target.style.top = y + "px";
+}
+
+
+function hitTarget() {
+
+    if (gameTime <= 0) return;
+
+    gameScore++;
+
+    document.getElementById("gameScore").innerText = gameScore;
+
+    moveTarget();
+}
 </script>
 
 </body>
